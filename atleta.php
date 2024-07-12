@@ -110,7 +110,12 @@ $consulta  = $banco->query("SELECT * FROM `" . DB_PREFIX . "atletas` WHERE `user
 		return false;
 	}
 });  
-<?php } ?>    
+<?php } ?>
+setTimeout(() => {
+  $('.alert-danger').remove();
+  $('.alert-success').remove();
+}, "3000");
+
 </script>
 </body>
 </html>
