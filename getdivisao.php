@@ -3,7 +3,6 @@ include_once('system/config.php');
 session_start();
 header("Content-type: application/json; charset=utf-8");
 
-
 $div = $_GET['divisao_id'];
 
 $user_id = $_SESSION["user_id"];
@@ -19,7 +18,5 @@ if($consulta->num_rows) {
   );
 }
 
-
 echo json_encode($json);
-
 ?>
