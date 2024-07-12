@@ -30,6 +30,9 @@ olá, <?php echo strtoupper($_SESSION["login"]);?> <a href="/painel.php" class="
 <?php if(isset($_GET['msg']) && $_GET['msg'] == 2) { ?>
 <div class="alert alert-success" role="alert">Cadastrado Realizado com Sucesso!</div>
 <?php } ?>
+<?php if(isset($_GET['msg']) && $_GET['msg'] == 4) { ?>
+<div class="alert alert-success" role="alert">Cadastrado Alterado com Sucesso!</div>
+<?php } ?>
 
 <div class="col">
 <label>Divisão:</label>
@@ -88,7 +91,9 @@ $consulta  = $banco->query("SELECT * FROM `" . DB_PREFIX . "atletas` WHERE `user
       <th scope="row"><?php echo $result['id']; ?></th>
       <td><?php echo $result['nome']; ?></td>
       <td><?php echo $result['divisao_id']  . ' -- ' . $divs->row['nome']; ?></td>
-      <td><button type="button" id="remove<?php echo $result['id']; ?>" class="btn btn-danger" formaction="/remove.php?id=<?php echo $result['id']; ?>&user_id=<?php echo $user_id; ?>" title="Remover Atleta" ><i class="bi bi-trash"></i></button>  <button type="button" id="edit" class="btn btn-info"><i class="bi bi-pencil"></i></button></td>
+      <td><button type="button" id="remove<?php echo $result['id']; ?>" class="btn btn-danger" formaction="/remove.php?id=<?php echo $result['id']; ?>&user_id=<?php echo $user_id; ?>" title="Remover Atleta" ><i class="bi bi-trash"></i></button>
+      <button type="button" id="edit<?php echo $result['id']; ?>" class="btn btn-info" formaction="/edit.php?atleta_id=<?php echo $result['id']; ?>&user_id=<?php echo $user_id; ?>"><i class="bi bi-pencil"></i></button>
+    </td>
     </tr>
     <?php } ?>
     <?php } else { ?>
@@ -105,6 +110,15 @@ $consulta  = $banco->query("SELECT * FROM `" . DB_PREFIX . "atletas` WHERE `user
 	$('#form-order').attr('action', this.getAttribute('formAction'));
 	
 	if (confirm('Deseja Excluir o Cadastro?')) {
+		$('#form-order').submit();
+	} else {
+		return false;
+	}
+}); 
+$('#edit<?php echo $result['id']; ?>').on('click', function(e) {
+	$('#form-order').attr('action', this.getAttribute('formAction'));
+	
+	if (confirm('Deseja Editar o Cadastro?')) {
 		$('#form-order').submit();
 	} else {
 		return false;
