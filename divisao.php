@@ -26,7 +26,9 @@
 <?php if(isset($_GET['msg']) && $_GET['msg'] == 2) { ?>
 <div class="alert alert-success" role="alert">Cadastrado Realizado com Sucesso!</div>
 <?php } ?>
-
+<?php if(isset($_GET['msg']) && $_GET['msg'] == 4) { ?>
+<div class="alert alert-success" role="alert">Cadastrado Alterado com Sucesso!</div>
+<?php } ?>
 <div class="col">
 <label>Nome da Divisao: </label><input name="nome" type="text" class="form-control" required>
 </div>
@@ -67,7 +69,7 @@ $consulta  = $banco->query("SELECT * FROM `" . DB_PREFIX . "divisao` WHERE 1");
       <th scope="row"><?php echo $result['divisao_id']; ?></th>
       <td><?php echo $result['nome']; ?></td>
       <td><button type="button" id="remove<?php echo $result['divisao_id']; ?>" class="btn btn-danger" formaction="/remove.php?divisao_id=<?php echo $result['divisao_id']; ?>" title="Remover Competição" ><i class="bi bi-trash"></i></button>
-      <button type="button" id="edit" class="btn btn-info"><i class="bi bi-pencil"></i></button></td>
+      <button type="button" id="edit<?php echo $result['divisao_id']; ?>" class="btn btn-info" formaction="/edit.php?divisao_id=<?php echo $result['divisao_id']; ?>"><i class="bi bi-pencil"></i></button></td>
     </tr>
     <?php } ?>
     <?php } else { ?>
@@ -83,6 +85,15 @@ $consulta  = $banco->query("SELECT * FROM `" . DB_PREFIX . "divisao` WHERE 1");
 	$('#form-order').attr('action', this.getAttribute('formAction'));
 	
 	if (confirm('Deseja Excluir o Cadastro?')) {
+		$('#form-order').submit();
+	} else {
+		return false;
+	}
+});
+$('#edit<?php echo $result['divisao_id']; ?>').on('click', function(e) {
+	$('#form-order').attr('action', this.getAttribute('formAction'));
+	
+	if (confirm('Deseja Editar o Cadastro?')) {
 		$('#form-order').submit();
 	} else {
 		return false;
