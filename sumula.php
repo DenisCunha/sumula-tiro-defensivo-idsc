@@ -14,7 +14,7 @@
 <body class="bg-light">
 <div class="container">
 <div style="padding:15px;">
-<form action="result.php" method="post" class="form-inline" autocomplete="off">
+<form action="sumula_adm.php" method="post" class="form-inline" autocomplete="off">
     <div class="row form-row">
 
 <fieldset>
@@ -67,7 +67,10 @@ $consulta   = $banco->query("SELECT * FROM `" . DB_PREFIX . "divisao`  WHERE 1 O
 </div>
 
 <div class="col">
-        <label>DQ: </label><input name="dq" type="tel" value="0" class="form-control">
+<label class="form-check-label" for="dq">DQ:</label>
+  <div class="form-check form-switch">
+  <input class="form-check-input" type="checkbox" name="dq" id="dq">
+</div>
 </div>
 
 <br>
