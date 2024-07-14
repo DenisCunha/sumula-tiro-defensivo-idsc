@@ -29,6 +29,13 @@ olá, <?php echo strtoupper($_SESSION["login"]);?> <a href="/sair.php" class="bt
 
         
 <div class="col">
+<a href="/competicao.php">
+<figure class="figure">
+<img src="asset/img/competicao.png" class="figure-img img-fluid rounded" alt="...">
+<figcaption class="figure-caption">Cadastrar Competição</figcaption>
+</figure>
+</a>
+
 <a href="/divisao.php">
 <figure class="figure">
 <img src="asset/img/divisao.png" class="figure-img img-fluid rounded" alt="...">
