@@ -26,23 +26,31 @@ olá, <?php echo strtoupper($_SESSION["login"]);?> <a href="/sair.php" class="bt
 </div>
 
 <br>
+
         
 <div class="col">
-<a href="/atleta.php">
+<a href="/divisao.php" class="col-3">
+<figure class="figure">
+<img src="asset/img/divisao.png" class="figure-img img-fluid rounded" alt="...">
+<figcaption class="figure-caption">Cadastrar Divisão</figcaption>
+</figure>
+</a>
+
+<a href="/atleta.php" class="col-3">
 <figure class="figure">
 <img src="asset/img/atirador.png" class="figure-img img-fluid rounded" alt="...">
 <figcaption class="figure-caption">Cadastrar Atleta</figcaption>
 </figure>
 </a>
 
-<a href="/dso.php">
+<a href="/dso.php" class="col-3">
 <figure class="figure">
 <img src="asset/img/dso.png" class="figure-img img-fluid rounded" alt="...">
 <figcaption class="figure-caption">Súmula Online</figcaption>
 </figure>
 </a>
 
-<a href="/">
+<a href="/" class="col-3">
 <figure class="figure">
 <img src="asset/img/resultado.png" class="figure-img img-fluid rounded" alt="...">
 <figcaption class="figure-caption">Ver Resultado</figcaption>

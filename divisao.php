@@ -19,7 +19,11 @@
 <div class="row form-row">
 
 <fieldset>
-<legend>Registro de Divisao</legend>
+<legend>Registro de Divisão</legend>
+<div class="d-grid gap-2 d-md-flex justify-content-md-end">
+olá, <?php echo strtoupper($_SESSION["login"]);?> <a href="/painel.php" class="btn btn-warning" ><i class="bi bi-window"></i> Menu</a>
+</div>
+
 <?php if(isset($_GET['msg']) && $_GET['msg'] == 1) { ?>
 <div class="alert alert-danger" role="alert">Divisão Já Cadastrada!</div>
 <?php } ?>
