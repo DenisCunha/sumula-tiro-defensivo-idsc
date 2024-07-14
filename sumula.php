@@ -789,6 +789,10 @@ $('select[name=\'divisao\']').on('change', function() {
 });
 
 $('select[name=\'divisao\']').trigger('change');
+
+$('#dq').on('change', function() {
+   // alert($(this).is(':checked'));
+});
 //--></script>   
 
 </body>

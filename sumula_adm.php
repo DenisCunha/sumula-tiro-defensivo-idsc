@@ -1,5 +1,5 @@
 <?php
-include_once('config.php');
+include_once('system/config.php');
 
 if($_SERVER['REQUEST_METHOD'] == 'POST') {
 
@@ -123,7 +123,11 @@ $fs = $_POST['fs'];
 
 $timer = $_POST['timer'];
 
-$dq = $_POST['dq'];
+if ($_POST['dq']) {
+    $dq = 1;
+} else {
+    $dq = 0; 
+}
 
 $nome = $_POST['nome'];
 
@@ -147,7 +151,7 @@ $banco->query("UPDATE `" . DB_PREFIX . "total_prova` SET `p1` = '" . (float)$tot
 $banco->query("INSERT INTO `" . DB_PREFIX . "total_prova` SET `nome_id` = '" . $nome . "', `divisao_id` = '" . $divisao . "', `competicao_id` = '" . $competicao_id . "', `p1` = '" . (float)$total . "', `soma` = (`p1` + `p2` + `p3` + `p4` + `p5` + `p6` + `p7` + `p8` + `p9` + `p10`)");    
 }
 
-header("Location: /dso.php");
+header("Location: /sumula.php");
 
 die();
 }
@@ -161,7 +165,7 @@ $banco->query("UPDATE `" . DB_PREFIX . "total_prova` SET `p2` = '" . (float)$tot
 } else {
 $banco->query("INSERT INTO `" . DB_PREFIX . "total_prova` SET `nome_id` = '" . $nome . "', `divisao_id` = '" . $divisao . "', `competicao_id` = '" . $competicao_id . "', `p2` = '" . (float)$total . "', `soma` = (`p1` + `p2` + `p3` + `p4` + `p5` + `p6` + `p7` + `p8` + `p9` + `p10`)");    
 }
-header("Location: /dso.php");
+header("Location: /sumula.php");
 
 die();
 } 
@@ -175,7 +179,7 @@ $banco->query("UPDATE `" . DB_PREFIX . "total_prova` SET `p3` = '" . (float)$tot
 } else {
 $banco->query("INSERT INTO `" . DB_PREFIX . "total_prova` SET `nome_id` = '" . $nome . "', `divisao_id` = '" . $divisao . "', `competicao_id` = '" . $competicao_id . "', `p3` = '" . (float)$total . "', `soma` = (`p1` + `p2` + `p3` + `p4` + `p5` + `p6` + `p7` + `p8` + `p9` + `p10`)");    
 }
-header("Location: /dso.php");
+header("Location: /sumula.php");
 
 die();
 }
@@ -189,7 +193,7 @@ $banco->query("UPDATE `" . DB_PREFIX . "total_prova` SET `p4` = '" . (float)$tot
 } else {
 $banco->query("INSERT INTO `" . DB_PREFIX . "total_prova` SET `nome_id` = '" . $nome . "', `divisao_id` = '" . $divisao . "', `competicao_id` = '" . $competicao_id . "', `p4` = '" . (float)$total . "', `soma` = (`p1` + `p2` + `p3` + `p4` + `p5` + `p6` + `p7` + `p8` + `p9` + `p10`)");    
 }
-header("Location: /dso.php");
+header("Location: /sumula.php");
 
 die();
 }
@@ -203,7 +207,7 @@ $banco->query("UPDATE `" . DB_PREFIX . "total_prova` SET `p5` = '" . (float)$tot
 } else {
 $banco->query("INSERT INTO `" . DB_PREFIX . "total_prova` SET `nome_id` = '" . $nome . "', `divisao_id` = '" . $divisao . "', `competicao_id` = '" . $competicao_id . "', `p5` = '" . (float)$total . "', `soma` = (`p1` + `p2` + `p3` + `p4` + `p5` + `p6` + `p7` + `p8` + `p9` + `p10`)");    
 }
-header("Location: /dso.php");
+header("Location: /sumula.php");
 
 die();
 }
@@ -217,7 +221,7 @@ $banco->query("UPDATE `" . DB_PREFIX . "total_prova` SET `p6` = '" . (float)$tot
 } else {
 $banco->query("INSERT INTO `" . DB_PREFIX . "total_prova` SET `nome_id` = '" . $nome . "', `divisao_id` = '" . $divisao . "', `competicao_id` = '" . $competicao_id . "', `p6` = '" . (float)$total . "', `soma` = (`p1` + `p2` + `p3` + `p4` + `p5` + `p6` + `p7` + `p8` + `p9` + `p10`)");    
 }
-header("Location: /dso.php");
+header("Location: /sumula.php");
 
 die();
 }
@@ -232,7 +236,7 @@ $banco->query("UPDATE `" . DB_PREFIX . "total_prova` SET `p7` = '" . (float)$tot
 } else {
 $banco->query("INSERT INTO `" . DB_PREFIX . "total_prova` SET `nome_id` = '" . $nome . "', `divisao_id` = '" . $divisao . "', `competicao_id` = '" . $competicao_id . "', `p7` = '" . (float)$total . "', `soma` = (`p1` + `p2` + `p3` + `p4` + `p5` + `p6` + `p7` + `p8` + `p9` + `p10`)");    
 }
-header("Location: /dso.php");
+header("Location: /sumula.php");
 
 die();
 }
@@ -246,7 +250,7 @@ $banco->query("UPDATE `" . DB_PREFIX . "total_prova` SET `p8` = '" . (float)$tot
 } else {
 $banco->query("INSERT INTO `" . DB_PREFIX . "total_prova` SET `nome_id` = '" . $nome . "', `divisao_id` = '" . $divisao . "', `competicao_id` = '" . $competicao_id . "', `p8` = '" . (float)$total . "', `soma` = (`p1` + `p2` + `p3` + `p4` + `p5` + `p6` + `p7` + `p8` + `p9` + `p10`)");    
 }
-header("Location: /dso.php");
+header("Location: /sumula.php");
 
 die();
 }
@@ -260,7 +264,7 @@ $banco->query("UPDATE `" . DB_PREFIX . "total_prova` SET `p9` = '" . (float)$tot
 } else {
 $banco->query("INSERT INTO `" . DB_PREFIX . "total_prova` SET `nome_id` = '" . $nome . "', `divisao_id` = '" . $divisao . "', `competicao_id` = '" . $competicao_id . "', `p9` = '" . (float)$total . "', `soma` = (`p1` + `p2` + `p3` + `p4` + `p5` + `p6` + `p7` + `p8` + `p9` + `p10`)");    
 }
-header("Location: /dso.php");
+header("Location: /sumula.php");
 
 die();
 }
@@ -274,7 +278,7 @@ $banco->query("UPDATE `" . DB_PREFIX . "total_prova` SET `p10` = '" . (float)$to
 } else {
 $banco->query("INSERT INTO `" . DB_PREFIX . "total_prova` SET `nome_id` = '" . $nome . "', `divisao_id` = '" . $divisao . "', `competicao_id` = '" . $competicao_id . "', `p10` = '" . (float)$total . "', `soma` = (`p1` + `p2` + `p3` + `p4` + `p5` + `p6` + `p7` + `p8` + `p9` + `p10`)");    
 }
-header("Location: /dso.php");
+header("Location: /sumula.php");
 
 die();
 }
