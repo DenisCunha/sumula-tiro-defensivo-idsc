@@ -22,11 +22,10 @@ include_once('system/config.php');
     die();
     }
     
-    
     if(isset($_GET['evento_id']) && $_GET['evento_id'] > 0) {
     $id = $_GET['evento_id'];
     $banco->query("DELETE FROM `" . DB_PREFIX . "competicao` WHERE `evento_id` = '$id'");
-    header("Location: /competition.php?msg=3");
+    header("Location: /competicao.php?msg=3");
 
     die();
     }

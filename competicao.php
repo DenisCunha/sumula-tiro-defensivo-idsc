@@ -2,7 +2,7 @@
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
-<title>Pista Competição IDSC - Gerenciar Divisão</title>
+<title>Pista Competição IDSC - Gerenciar Competição</title>
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <meta http-equiv="X-UA-Compatible" content="ie=edge">
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
@@ -14,18 +14,18 @@
 <body class="bg-light">
 <div class="container">
 <div style="padding:15px;">
-<form action="/divisao_adm.php" method="post" class="form-inline" autocomplete="off">
+<form action="/competicao_adm.php" method="post" class="form-inline" autocomplete="off">
 <div class="row form-row">
 
 <fieldset>
-<legend>Registro de Divisão</legend>
+<legend>Registro de Competição</legend>
 <div class="d-grid gap-2 d-md-flex justify-content-md-end">
 olá, <?php echo strtoupper($_SESSION["login"]);?> <a href="/painel.php" class="btn btn-warning" ><i class="bi bi-window"></i> Menu</a>
 </div>
 
 <br>
 <?php if(isset($_GET['msg']) && $_GET['msg'] == 1) { ?>
-<div class="alert alert-danger" role="alert">Divisão Já Cadastrada!</div>
+<div class="alert alert-danger" role="alert">Competição Já Cadastrada!</div>
 <?php } ?>
 <?php if(isset($_GET['msg']) && $_GET['msg'] == 2) { ?>
 <div class="alert alert-success" role="alert">Cadastrado Realizado com Sucesso!</div>
@@ -34,7 +34,11 @@ olá, <?php echo strtoupper($_SESSION["login"]);?> <a href="/painel.php" class="
 <div class="alert alert-success" role="alert">Cadastrado Alterado com Sucesso!</div>
 <?php } ?>
 <div class="col">
-<label>Nome da Divisao: </label><input name="nome" type="text" class="form-control" required>
+<label>Nome da Competição: </label><input name="nome" type="text" class="form-control" required>
+</div>
+<div class="col">
+<label>Data da Competição: </label><input name="datac" type="text" class="form-control" required>
+<input name="dso" type="hidden" class="form-control" value="<?php echo $_SESSION["user_id"]; ?>">
 </div>
 
 <br>
@@ -50,17 +54,18 @@ olá, <?php echo strtoupper($_SESSION["login"]);?> <a href="/painel.php" class="
 </form>
 </div>
 <?php if(isset($_GET['msg']) && $_GET['msg'] == 3) { ?>
-<div class="alert alert-danger" role="alert">Divisão Excluida Com Sucesso!</div>
+<div class="alert alert-danger" role="alert">Competição Excluida com Sucesso!</div>
 <?php } ?>
 <?php  include_once('system/config.php');
-$consulta  = $banco->query("SELECT * FROM `" . DB_PREFIX . "divisao` WHERE 1");
+$consulta  = $banco->query("SELECT * FROM `" . DB_PREFIX . "competicao` WHERE 1");
 ?>
 <table class="table">
   <thead>
 <?php if($consulta->num_rows) { ?>
     <tr>
       <th scope="col">#</th>
-      <th scope="col">Divisão</th>
+      <th scope="col">Competição</th>
+      <th scope="col">Data Competição</th>
       <th scope="col">Ação</th>
     </tr>
 <?php } ?>
@@ -70,10 +75,11 @@ $consulta  = $banco->query("SELECT * FROM `" . DB_PREFIX . "divisao` WHERE 1");
 <?php if($consulta->num_rows) { ?>
 <?php foreach($consulta->rows as $result) { ?>
     <tr>
-      <th scope="row"><?php echo $result['divisao_id']; ?></th>
-      <td><?php echo $result['nome']; ?></td>
-      <td><button type="button" id="remove<?php echo $result['divisao_id']; ?>" class="btn btn-danger" formaction="/remove.php?divisao_id=<?php echo $result['divisao_id']; ?>" title="Remover Divisão" ><i class="bi bi-trash"></i></button>
-      <button type="button" id="edit<?php echo $result['divisao_id']; ?>" class="btn btn-info" formaction="/edit.php?divisao_id=<?php echo $result['divisao_id']; ?>"><i class="bi bi-pencil"></i></button></td>
+      <th scope="row"><?php echo $result['evento_id']; ?></th>
+      <td><?php echo $result['nomeevento']; ?></td>
+      <td><?php echo $result['dataevento']; ?></td>
+      <td><button type="button" id="remove<?php echo $result['evento_id']; ?>" class="btn btn-danger" formaction="/remove.php?evento_id=<?php echo $result['evento_id']; ?>" title="Remover Competição" ><i class="bi bi-trash"></i></button>
+      <button type="button" id="edit<?php echo $result['evento_id']; ?>" class="btn btn-info" formaction="/edit.php?evento_id=<?php echo $result['evento_id']; ?>"><i class="bi bi-pencil"></i></button></td>
     </tr>
     <?php } ?>
     <?php } else { ?>
@@ -85,7 +91,7 @@ $consulta  = $banco->query("SELECT * FROM `" . DB_PREFIX . "divisao` WHERE 1");
 </div>
 <script type="text/javascript">
 <?php foreach($consulta->rows as $result) { ?>
-  $('#remove<?php echo $result['divisao_id']; ?>').on('click', function(e) {
+  $('#remove<?php echo $result['evento_id']; ?>').on('click', function(e) {
 	$('#form-order').attr('action', this.getAttribute('formAction'));
 	
 	if (confirm('Deseja Excluir o Cadastro?')) {
@@ -94,7 +100,7 @@ $consulta  = $banco->query("SELECT * FROM `" . DB_PREFIX . "divisao` WHERE 1");
 		return false;
 	}
 });
-$('#edit<?php echo $result['divisao_id']; ?>').on('click', function(e) {
+$('#edit<?php echo $result['evento_id']; ?>').on('click', function(e) {
 	$('#form-order').attr('action', this.getAttribute('formAction'));
 	
 	if (confirm('Deseja Editar o Cadastro?')) {

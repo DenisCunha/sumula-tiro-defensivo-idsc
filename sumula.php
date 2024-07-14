@@ -2,7 +2,7 @@
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
-<title>Pista Treino IDSC - DSO</title>
+<title>Pista Competição IDSC - Sumula DSO</title>
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <meta http-equiv="X-UA-Compatible" content="ie=edge">
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
@@ -15,7 +15,7 @@
 <div class="container">
 <div style="padding:15px;">
 <form action="sumula_adm.php" method="post" class="form-inline" autocomplete="off">
-    <div class="row form-row">
+<div class="row form-row">
 
 <fieldset>
         <legend>Súmula <i class="bi bi-file-earmark-text"></i></legend>

@@ -30,6 +30,15 @@ olá, '. strtoupper($_SESSION["login"]) .' <a href="/painel.php" class="btn btn-
 <div class="col">
 <label>Nome: </label><input name="nome" type="text" class="form-control" value="'. $_SESSION["camponome"] . '" required>
 <input name="id" type="hidden" value="'. $_SESSION["id"] . '">
+';
+
+if ($_SESSION["tipo"] == "competicao") {
+$html .='
+<label>Data: </label><input name="datac" type="text" class="form-control" value="'. $_SESSION["dataevento"] . '" required>
+';
+}
+
+$html .='
 <input name="tipo" type="hidden" value="'. $_SESSION["tipo"] . '"> 
 </div>
 
