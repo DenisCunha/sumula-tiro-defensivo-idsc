@@ -29,35 +29,35 @@ olá, <?php echo strtoupper($_SESSION["login"]);?> <a href="/sair.php" class="bt
 
         
 <div class="col">
-<a href="/divisao.php" class="col-3">
+<a href="/divisao.php">
 <figure class="figure">
 <img src="asset/img/divisao.png" class="figure-img img-fluid rounded" alt="...">
 <figcaption class="figure-caption">Cadastrar Divisão</figcaption>
 </figure>
 </a>
 
-<a href="/atleta.php" class="col-3">
+<a href="/atleta.php">
 <figure class="figure">
 <img src="asset/img/atirador.png" class="figure-img img-fluid rounded" alt="...">
 <figcaption class="figure-caption">Cadastrar Atleta</figcaption>
 </figure>
 </a>
 
-<a href="/dso.php" class="col-3">
+<a href="/sumula.php">
 <figure class="figure">
 <img src="asset/img/dso.png" class="figure-img img-fluid rounded" alt="...">
 <figcaption class="figure-caption">Súmula Online</figcaption>
 </figure>
 </a>
 
-<a href="/" class="col-3">
+<a href="/">
 <figure class="figure">
 <img src="asset/img/resultado.png" class="figure-img img-fluid rounded" alt="...">
 <figcaption class="figure-caption">Ver Resultado</figcaption>
 </figure>
 </a>
-
 </div>
+
 <br>
 
 </div>
