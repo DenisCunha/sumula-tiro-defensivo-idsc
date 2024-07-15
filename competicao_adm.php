@@ -3,24 +3,19 @@ include_once('system/config.php');
 
 if($_SERVER['REQUEST_METHOD'] == 'POST') {
 
-$evento_id = $_POST['evento_id'];
-
 $nome = $_POST['nome'];
 $data = $_POST['datac'];
 $dso = $_POST['dso'];
 
-$extensao = strtolower(substr( $_FILES['imagem']['name'], -4));
-$novo_nome = date('d-m-Y-H:i:s') . $extensao;
-$diretorio = getcwd() . '/isset/img/';
+$extensao = strtolower(substr($_FILES['imagem']['name'], -4));
+$novo_nome = date('d-m-Y-H-i-s') . $extensao;
+$diretorio = getcwd() . '/asset/img/';
 
-
-if (move_uploaded_file( $_FILES['imagem']['tmp_name'], $diretorio.$novo_nome)) {
-    $imagesrc = "isset/img/".$novo_nome;
+if(move_uploaded_file($_FILES['imagem']['tmp_name'], $diretorio.$novo_nome)) {
+    $imagesrc = "asset/img/".$novo_nome;
 } else {
-    $imagesrc = "erro de imagem" . $_FILES['imagem']['name'];
+    $imagesrc = "asset/img/padrao.png";
 }
-
-
 
 $consulta  = $banco->query("SELECT * FROM `" . DB_PREFIX . "competicao`  WHERE `nomeevento` = '$nome'");
 
