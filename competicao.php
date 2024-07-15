@@ -14,7 +14,7 @@
 <body class="bg-light">
 <div class="container">
 <div style="padding:15px;">
-<form action="/competicao_adm.php" method="post" class="form-inline" autocomplete="off">
+<form action="/competicao_adm.php" method="post" class="form-inline" autocomplete="off" enctype="multipart/form-data">
 <div class="row form-row">
 
 <fieldset>
@@ -34,11 +34,15 @@ olá, <?php echo strtoupper($_SESSION["login"]);?> <a href="/painel.php" class="
 <div class="alert alert-success" role="alert">Cadastrado Alterado com Sucesso!</div>
 <?php } ?>
 <div class="col">
-<label>Nome da Competição: </label><input name="nome" type="text" class="form-control" required>
+<label>Nome da Competição: </label><input type="text" name="nome"  class="form-control" required>
 </div>
 <div class="col">
 <label>Data da Competição: </label><input name="datac" type="text" class="form-control" required>
-<input name="dso" type="hidden" class="form-control" value="<?php echo $_SESSION["user_id"]; ?>">
+<input type="hidden" name="dso" class="form-control" value="<?php echo $_SESSION["user_id"]; ?>">
+</div>
+<div class="col">
+  <label for="image">Imagem: </label>
+  <input type="file" name="imagem" id="imagem" class="form-control" required>
 </div>
 
 <br>
