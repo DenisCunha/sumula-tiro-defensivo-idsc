@@ -41,7 +41,7 @@ olá, <?php echo strtoupper($_SESSION["login"]);?> <a href="/painel.php" class="
 <input type="hidden" name="dso" class="form-control" value="<?php echo $_SESSION["user_id"]; ?>">
 </div>
 <div class="col">
-  <label for="image">Imagem: </label>
+  <label for="image">Imagem: Dimensão 400x200 pixel</label>
   <input type="file" name="imagem" id="imagem" class="form-control" required>
 </div>
 
