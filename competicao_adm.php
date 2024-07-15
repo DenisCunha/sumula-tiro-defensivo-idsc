@@ -9,7 +9,7 @@ $dso = $_POST['dso'];
 
 $extensao = strtolower(substr($_FILES['imagem']['name'], -4));
 $novo_nome = date('d-m-Y-H-i-s') . $extensao;
-$diretorio = getcwd() . '/asset/img/';
+$diretorio = DIR_APPLICATION . '/asset/img/';
 
 if(move_uploaded_file($_FILES['imagem']['tmp_name'], $diretorio.$novo_nome)) {
     $imagesrc = "asset/img/".$novo_nome;

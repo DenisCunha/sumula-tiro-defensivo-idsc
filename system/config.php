@@ -8,6 +8,8 @@ include_once('db/mysqli.php');
 require_once('helper/general.php');
 require_once('helper/utf8.php');
 
+define('DIR_APPLICATION', '/var/www/html/idsc');
+
 // DB
 define('DB_DRIVER', 'mysqli');
 define('DB_HOSTNAME', 'localhost');

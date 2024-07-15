@@ -1,9 +1,19 @@
 <?php
 session_start();
-include_once('system/config.php');
 
-if(isset($_GET['clube_id'])) {
-    $competicao_id = $_GET['clube_id'];  
+// Configuration
+if (is_file('system/config.php')) {
+	require_once('system/config.php');
+}
+
+// Install
+if (!defined('DIR_APPLICATION')) {
+	header('Location: install/index.php');
+	exit;
+}
+
+if(isset($_GET['competicao_id'])) {
+    $competicao_id = $_GET['competicao_id'];
   } else {
     $competicao_id = 0;  
 }
@@ -34,13 +44,13 @@ olá, <?php echo strtoupper($_SESSION["login"]);?> <a href="/painel.php" class="
 <hr>
 
 <br>
-<h3>Escolher o Clube</h3>
+<h3>Escolher a Competição</h3>
 
 <br>
 <center>
 <?php foreach ($competition->rows as $row) { ?>
-<a href="?clube_id=<?php echo $row['evento_id']; ?>" class="imgs">
-  <img src="<?php echo $row['image']; ?>" alt="Nome clube"  /><br>
+<a href="?competicao_id=<?php echo $row['evento_id']; ?>" class="imgs">
+  <img src="<?php echo $row['image']; ?>" alt="<?php echo $row['nomeevento']; ?>"  /><br>
   <?php echo $row['nomeevento']; ?><br>
   <?php echo $row['dataevento']; ?>
 </a> 
