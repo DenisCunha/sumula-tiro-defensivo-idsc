@@ -1,6 +1,8 @@
 <?php
 ini_set('display_errors', 1);
 error_reporting(E_ALL);
+include_once('../system/db.php');
+include_once('../system/db/mysqli.php');
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
@@ -11,38 +13,60 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
   $options['db_database'] = $_POST['db_database'];
   $options['db_port']     = $_POST['db_port'];
   $options['db_prefix']   = $_POST['db_prefix'];
-  
-  $name = strtolower($_POST['username']);
-  $pass = md5($_POST['password']);
+  $options['username']    = strtolower($_POST['username']);
+  $options['password']    = md5($_POST['password']);
 
-  instalacao($options, $name, $pass, $install);
+
+  instalacao($options);
 }
 
-function instalacao($options, $name, $pass, $install) {
+function instalacao($options) {
+    database($options);
     create_file($options);
+    header("Location: /install");   
+}
 
-    $mysqli = new mysqli($_POST['db_hostname'], $_POST['db_username'], $_POST['db_password'], $_POST['db_database']);
-    
-    if ($mysqli->connect_errno) {
-    die($mysqli->connect_error);
-    $error['conect'] = ' ERROR = ' . $mysqli->connect_error ;
-    exit();
-    } else {
-    
-    $mysqli->query("INSERT INTO `usuario` SET `login` = '$name', `senha` = '$pass', `nivel` = '1' ");
-    
-    $mysqli->close();
+function database($options) {
+  $db = new DB($options['db_driver'], $options['db_hostname'], $options['db_username'], $options['db_password'], $options['db_database']);
 
+  $file = 'idsc.sql';
 
-    header("Location: /install");
+  if (!file_exists($file)) {
+    exit('Could not load sql file: ' . $file);
+  }
+
+  $lines = file($file);
+
+  if ($lines) {
+    $sql = '';
+
+    foreach($lines as $line) {
+      if ($line && (substr($line, 0, 2) != '--') && (substr($line, 0, 1) != '#')) {
+        $sql .= $line;
+
+        if (preg_match('/;\s*$/', $line)) { 
+          $sql = str_replace("CREATE TABLE IF NOT EXISTS `", "CREATE TABLE IF NOT EXISTS `" . $options['db_prefix'], $sql);
+          $sql = str_replace("INSERT INTO `", "INSERT INTO `" . $options['db_prefix'], $sql);
+          $sql = str_replace("ALTER TABLE `", "ALTER TABLE `" . $options['db_prefix'], $sql);
+
+          $db->query($sql);
+
+          $sql = '';
+        }
+      }
     }
+
+    $db->query("SET CHARACTER SET utf8");
+
+    $db->query("SET @@session.sql_mode = 'MYSQL40'");
+    $db->query("INSERT INTO `" . $options['db_prefix'] . "usuarios` SET `login` = '" .  $options['username'] . "', `senha` = '" . $options['password'] . "', `nivel` = '1'");
+  }
+
 }
 
 function create_file($options) {
 	$output  = "<?php" . "\n";
-
-	$output .= "ini_set('display_errors', 1);" . "\n";
-	$output .= "error_reporting(E_ALL);" . "\n\n";
+  $output .= "include_once('error.php');" . "\n\n";
 
   $output .= "// INCLUDES" . "\n";
   $output .= "include_once('registry.php');" . "\n";
