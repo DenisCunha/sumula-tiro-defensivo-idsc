@@ -23,6 +23,19 @@
   olá, <?php echo strtoupper($_SESSION["login"]);?> <a href="/painel.php" class="btn btn-warning" ><i class="bi bi-window"></i> Menu</a>
 </div><br>
 <div class="col">
+    <label>Competição:</label>
+    <select name="competicao_id" class="form-select">
+    <?php
+include_once('system/config.php');
+$consulta   = $banco->query("SELECT * FROM `" . DB_PREFIX . "competicao`  WHERE 1 ORDER BY `evento_id` DESC");
+ if($consulta->num_rows) { 
+ foreach($consulta->rows as $result) { 
+?>
+    <option value="<?php echo $result['evento_id']; ?>"><?php echo $result['nomeevento']; ?></option>
+    <?php } } ?>
+    </select> 
+</div>
+<div class="col">
     <label>Divisão:</label>
     <select name="divisao" class="form-select">
     <?php
@@ -35,20 +48,10 @@ $consulta   = $banco->query("SELECT * FROM `" . DB_PREFIX . "divisao`  WHERE 1 O
     <?php } } ?>
     </select> 
 </div>
-        <input type="hidden" name="competicao_id"  value="<?php echo $_SESSION["user_id"];  ?>" />
+
 <div class="col">
     <label>Passagem:</label>
     <select name="pista" class="form-select">
-    <option value="1">Pista 01</option>
-    <option value="2">Pista 02</option>
-    <option value="3">Pista 03</option>
-    <option value="4">Pista 04</option>
-    <option value="5">Pista 05</option>
-    <option value="6">Pista 06</option>
-    <option value="7">Pista 07</option>
-    <option value="8">Pista 08</option>
-    <option value="9">Pista 09</option>
-    <option value="10">Pista 10</option>
     </select> 
 </div>
 <div class="col">
@@ -789,6 +792,44 @@ $('select[name=\'divisao\']').on('change', function() {
 });
 
 $('select[name=\'divisao\']').trigger('change');
+
+$('select[name=\'competicao_id\']').on('change', function() {
+
+$.ajax({
+  url: '/getcompeticao.php?evento_id=' + this.value,
+  dataType: 'json',
+  beforeSend: function() {
+    $('select[name=\'competicao_id\']').after(' <i class="bi bi-arrow-repeat"></i>');
+  },
+  complete: function() {
+    $('.bi-arrow-repeat').remove();
+  },
+  success: function(json) {
+    html = '';
+
+      if (json['zone'] && json['zone'] != '') {
+      for (i = 0; i < json['zone'].length; i++) {
+        html += '<option value="' + json['zone'][i]['id'] + '"';
+
+        if (json['zone'][i]['competicao_id'] == '1') {
+          html += ' selected="selected"';
+        }
+
+        html += '>' + json['zone'][i]['nome'] + '</option>';
+      }
+    } else {
+      html += '<option value="0" selected="selected">Nenhum</option>';
+    }
+
+    $('select[name=\'pista\']').html(html);
+  },
+  error: function(xhr, ajaxOptions, thrownError) {
+    alert(thrownError + "\r\n" + xhr.statusText + "\r\n" + xhr.responseText);
+  }
+});
+});
+
+$('select[name=\'competicao_id\']').trigger('change');
 
 $('#dq').on('change', function() {
    // alert($(this).is(':checked'));

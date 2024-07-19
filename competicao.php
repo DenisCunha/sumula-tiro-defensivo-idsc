@@ -41,6 +41,9 @@ olá, <?php echo strtoupper($_SESSION["login"]);?> <a href="/painel.php" class="
 <input type="hidden" name="dso" class="form-control" value="<?php echo $_SESSION["user_id"]; ?>">
 </div>
 <div class="col">
+<label>Pista: </label><input name="stage" type="number" min="1" max="10" class="form-control" value="1" required>
+</div>
+<div class="col">
   <label for="image">Imagem: Dimensão 400x200 pixel</label>
   <input type="file" name="imagem" id="imagem" class="form-control" required>
 </div>
@@ -70,6 +73,7 @@ $consulta  = $banco->query("SELECT * FROM `" . DB_PREFIX . "competicao` WHERE 1"
       <th scope="col">#</th>
       <th scope="col">Competição</th>
       <th scope="col">Data Competição</th>
+      <th scope="col">Pista</th>
       <th scope="col">Ação</th>
     </tr>
 <?php } ?>
@@ -82,6 +86,7 @@ $consulta  = $banco->query("SELECT * FROM `" . DB_PREFIX . "competicao` WHERE 1"
       <th scope="row"><?php echo $result['evento_id']; ?></th>
       <td><?php echo $result['nomeevento']; ?></td>
       <td><?php echo $result['dataevento']; ?></td>
+      <td><?php echo $result['stage']; ?></td>
       <td><button type="button" id="remove<?php echo $result['evento_id']; ?>" class="btn btn-danger" formaction="/remove.php?evento_id=<?php echo $result['evento_id']; ?>" title="Remover Competição" ><i class="bi bi-trash"></i></button>
       <button type="button" id="edit<?php echo $result['evento_id']; ?>" class="btn btn-info" formaction="/edit.php?evento_id=<?php echo $result['evento_id']; ?>"><i class="bi bi-pencil"></i></button></td>
     </tr>

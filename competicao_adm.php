@@ -6,6 +6,7 @@ if($_SERVER['REQUEST_METHOD'] == 'POST') {
 $nome = $_POST['nome'];
 $data = $_POST['datac'];
 $dso = $_POST['dso'];
+$stage = $_POST['stage'];
 
 $extensao = strtolower(substr($_FILES['imagem']['name'], -4));
 $novo_nome = date('d-m-Y-H-i-s') . $extensao;
@@ -25,7 +26,7 @@ if($consulta->num_rows) {
      die();  
 } else {
 
-    $banco->query("INSERT INTO `" . DB_PREFIX . "competicao` SET `nomeevento` = '$nome', `dataevento` = '$data', `dso_id` = '$dso', `image` = '$imagesrc'");
+    $banco->query("INSERT INTO `" . DB_PREFIX . "competicao` SET `nomeevento` = '$nome', `dataevento` = '$data', `dso_id` = '$dso', `stage` = '$stage', `image` = '$imagesrc'");
     header("Location: /competicao.php?msg=2");
 
     die(); 

@@ -86,7 +86,7 @@ $consulta  = $banco->query("SELECT * FROM `" . DB_PREFIX . "atletas` WHERE `user
 <form method="post" action="" id="form-order">
 <?php if($consulta->num_rows) { ?>
 <?php foreach($consulta->rows as $result) { ?>
-<?php $divs = $banco->query("SELECT * FROM `divisao` WHERE `divisao_id` = '" . $result['divisao_id'] . "' "); ?>
+<?php $divs = $banco->query("SELECT * FROM `" . DB_PREFIX . "divisao` WHERE `divisao_id` = '" . $result['divisao_id'] . "' "); ?>
     <tr>
       <th scope="row"><?php echo $result['id']; ?></th>
       <td><?php echo $result['nome']; ?></td>

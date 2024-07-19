@@ -2,3 +2,5 @@
 
 ## Projeto sugiu para uma necessidade de gerenciamento de competições com muitos incritos e demora na contabilização da pontuação manual
 
+### Projeto em desenvolvimento em breve instruções de instação e uso.
+

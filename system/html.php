@@ -35,6 +35,7 @@ olá, '. strtoupper($_SESSION["login"]) .' <a href="/painel.php" class="btn btn-
 if ($_SESSION["tipo"] == "competicao") {
 $html .='
 <label>Data: </label><input name="datac" type="text" class="form-control" value="'. $_SESSION["dataevento"] . '" required>
+<label>Pista: </label><input name="stage" type="number" min="1" max="10" class="form-control" value="'. $_SESSION["stage"] . '" required>
 ';
 }
 
