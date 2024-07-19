@@ -88,6 +88,9 @@ include_once('system/config.php');
         $id = $_POST['id'];
         $datac = $_POST['datac'];
         $stage = $_POST['stage'];
+        $target = $_POST['target'];
+        $target1 = $_POST['target1'];
+        $shots = $_POST['shots'];
         $banco->query("UPDATE `" . DB_PREFIX . "competicao` SET `nomeevento` = '$nome', `dataevento` = '$datac', `stage` = '$stage', `target` = '$target', `target1` = '$target1', `shots` = '$shots' WHERE `evento_id` = '$id'");
         header("Location: /competicao.php?msg=4");
     
