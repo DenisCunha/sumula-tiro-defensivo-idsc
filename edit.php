@@ -49,6 +49,9 @@ include_once('system/config.php');
         $_SESSION["camponome"] = $result->row['nomeevento'];
         $_SESSION["dataevento"] = $result->row['dataevento'];
         $_SESSION["stage"] = $result->row['stage'];
+        $_SESSION["target"] = $result->row['target'];
+        $_SESSION["target1"] = $result->row['target1'];
+        $_SESSION["shots"] = $result->row['shots'];
         $_SESSION["id"] = $id;
         $_SESSION["tipo"] = "competicao";
     
@@ -85,7 +88,7 @@ include_once('system/config.php');
         $id = $_POST['id'];
         $datac = $_POST['datac'];
         $stage = $_POST['stage'];
-        $banco->query("UPDATE `" . DB_PREFIX . "competicao` SET `nomeevento` = '$nome', `dataevento` = '$datac', `stage` = '$stage' WHERE `evento_id` = '$id'");
+        $banco->query("UPDATE `" . DB_PREFIX . "competicao` SET `nomeevento` = '$nome', `dataevento` = '$datac', `stage` = '$stage', `target` = '$target', `target1` = '$target1', `shots` = '$shots' WHERE `evento_id` = '$id'");
         header("Location: /competicao.php?msg=4");
     
         die(); 

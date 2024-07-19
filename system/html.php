@@ -36,6 +36,9 @@ if ($_SESSION["tipo"] == "competicao") {
 $html .='
 <label>Data: </label><input name="datac" type="text" class="form-control" value="'. $_SESSION["dataevento"] . '" required>
 <label>Pista: </label><input name="stage" type="number" min="1" max="10" class="form-control" value="'. $_SESSION["stage"] . '" required>
+<label>Alvos Papel: </label><input name="target" type="number" min="1" max="100" class="form-control" value="'. $_SESSION["target"] . '" required>
+<label>Alvos Metal: </label><input name="target1" type="number" min="1" max="10" class="form-control" value="'. $_SESSION["target1"] . '" required>
+<label>Total Disparos: </label><input name="shots" type="number" min="1" max="220" class="form-control" value="'. $_SESSION["shots"] . '" required>
 ';
 }
 

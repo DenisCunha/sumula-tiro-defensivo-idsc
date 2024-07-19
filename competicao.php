@@ -74,6 +74,7 @@ $consulta  = $banco->query("SELECT * FROM `" . DB_PREFIX . "competicao` WHERE 1"
       <th scope="col">Competição</th>
       <th scope="col">Data Competição</th>
       <th scope="col">Pista</th>
+      <th scope="col">Total Disparos</th>
       <th scope="col">Ação</th>
     </tr>
 <?php } ?>
@@ -87,6 +88,7 @@ $consulta  = $banco->query("SELECT * FROM `" . DB_PREFIX . "competicao` WHERE 1"
       <td><?php echo $result['nomeevento']; ?></td>
       <td><?php echo $result['dataevento']; ?></td>
       <td><?php echo $result['stage']; ?></td>
+      <td><?php echo $result['shots']; ?></td>
       <td><button type="button" id="remove<?php echo $result['evento_id']; ?>" class="btn btn-danger" formaction="/remove.php?evento_id=<?php echo $result['evento_id']; ?>" title="Remover Competição" ><i class="bi bi-trash"></i></button>
       <button type="button" id="edit<?php echo $result['evento_id']; ?>" class="btn btn-info" formaction="/edit.php?evento_id=<?php echo $result['evento_id']; ?>"><i class="bi bi-pencil"></i></button></td>
     </tr>
