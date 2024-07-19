@@ -215,7 +215,7 @@ $consulta   = $banco->query("SELECT * FROM `" . DB_PREFIX . "divisao`  WHERE 1 O
   <div class="col-6 col-sm-6 col-md-3">
   <div class="input-group mb-3">
   <span class="input-group-text" id="basic-addon1">0</span>
-  <input name="t4_0" type="tel" value="0" class="form-control"> 2:  5:  M:
+  <input name="t4_0" type="tel" value="0" class="form-control">
   </div>
   </div>
   <div class="col-6 col-sm-6 col-md-3">

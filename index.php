@@ -19,6 +19,12 @@ if(isset($_GET['competicao_id'])) {
 }
 
 $competition = $banco->query("SELECT * FROM `" . DB_PREFIX . "competicao`  WHERE 1 ORDER BY `evento_id` DESC");
+$stages = $banco->query("SELECT * FROM `" . DB_PREFIX . "competicao`  WHERE `evento_id`= '" . $competicao_id . "'");
+$divisao = $banco->query("SELECT * FROM `" . DB_PREFIX . "divisao`  WHERE 1 ORDER BY `nome` ASC");
+
+foreach ($divisao->rows as $row) {
+$result[$row['divisao_id']] = $banco->query("SELECT * FROM `" . DB_PREFIX . "pistas`  WHERE `divisao` = '" . $row['divisao_id'] . "' AND `competicao_id` = '" . $competicao_id . "' ORDER BY `total` ASC");
+}
 
 ?>
 <!DOCTYPE html>
@@ -42,7 +48,51 @@ olá, <?php echo strtoupper($_SESSION["login"]);?> <a href="/painel.php" class="
 <br>
 <?php } ?>
 <hr>
+<?php  if($competicao_id) { ?>
+<?php foreach ($divisao->rows as $row) { ?>
+<?php if($result[$row['divisao_id']]->num_rows) { ?>
+  <?php $divisaonome[$row['divisao_id']] = $banco->query("SELECT * FROM `" . DB_PREFIX . "divisao`  WHERE  `divisao_id` = '" . $row['divisao_id'] ."' "); 
+    ?>
+  
+  <?php for ($i =1; $i <= $stages->row['stage']; $i ++) { ?>
+<div class="content">
+    <table class="rTable">
+        <thead> <tr style="background:#E32F34;color:#fff;"><th colspan="3">Pista <?php echo $i .' - ' . $divisaonome[$row['divisao_id']]->row['nome']; ?></th></tr>
+            <tr>
 
+                <th>Nome </th>
+                <th>Tempo Timer</th>
+                <th>Tempo Total</th>
+            </tr>
+        </thead>
+
+        <tbody>
+            
+            <?php foreach ($result[$row['divisao_id']]->rows as $row[$row['divisao_id']]) { ?>
+            
+            <?php if($row[$row['divisao_id']]['divisao'] == 1 && $row[$row['divisao_id']]['stage'] == $i) { ?>
+            
+            <?php $nome = $banco->query("SELECT * FROM `" . DB_PREFIX . "atletas` WHERE `id` = '" . $row[$row['divisao_id']]['nome'] . "' "); ?>
+            <tr>
+                <td><?php echo $nome->row['nome']; ?> <?php if($row[$row['divisao_id']]['dq']) { echo "<span class='dq'>*</span>"; } ?></td>
+                <td><?php echo $row[$row['divisao_id']]['timer'] ; ?></td>
+                <td><?php echo $row[$row['divisao_id']]['total'] ; ?></td>
+            </tr>
+            <?php } ?>
+             
+            <?php }  ?>
+
+        </tbody>
+    </table>
+
+</div>
+<?php }  ?>
+
+<br>
+<?php }  ?>
+
+<?php } ?>
+<?php } else { ?>
 <br>
 <h3>Escolher a Competição</h3>
 
@@ -56,7 +106,7 @@ olá, <?php echo strtoupper($_SESSION["login"]);?> <a href="/painel.php" class="
 </a> 
 <?php } ?>
 </center>
-
+<?php } ?>
 <br>
 <center><span><b>Versão:</b> 1.0.0.0 - <b>Data:</b> 11/07/2024</span></center>
 </body>
