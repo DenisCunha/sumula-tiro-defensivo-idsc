@@ -49,15 +49,29 @@ olá, <?php echo strtoupper($_SESSION["login"]);?> <a href="/painel.php" class="
 <?php } ?>
 <hr>
 <?php  if($competicao_id) { ?>
+  <?php 
+  function randomHexColor() {
+  $letters = '0123456789ABCDEF';
+  $color = '#';
+  for ($i = 0; $i < 6; $i++) {
+      $color .= $letters[rand(0, 15)];
+  }
+  return $color;
+}
+$cores = array();
+for ($i = 0; $i < 25; $i++) {
+    $cores[] = randomHexColor();
+}
+?>
 <?php foreach ($divisao->rows as $row) { ?>
 <?php if($result[$row['divisao_id']]->num_rows) { ?>
   <?php $divisaonome[$row['divisao_id']] = $banco->query("SELECT * FROM `" . DB_PREFIX . "divisao`  WHERE  `divisao_id` = '" . $row['divisao_id'] ."' "); 
-    ?>
+?>
   
   <?php for ($i =1; $i <= $stages->row['stage']; $i ++) { ?>
 <div class="content">
     <table class="rTable">
-        <thead> <tr style="background:#E32F34;color:#fff;"><th colspan="3">Pista <?php echo $i .' - ' . $divisaonome[$row['divisao_id']]->row['nome']; ?></th></tr>
+        <thead> <tr style="background:<?php echo $cores[$row['divisao_id']]; ?>;color:#fff;"><th colspan="3">Pista <?php echo $i .' - ' . $divisaonome[$row['divisao_id']]->row['nome']; ?></th></tr>
             <tr>
 
                 <th>Nome </th>
@@ -70,7 +84,7 @@ olá, <?php echo strtoupper($_SESSION["login"]);?> <a href="/painel.php" class="
             
             <?php foreach ($result[$row['divisao_id']]->rows as $row[$row['divisao_id']]) { ?>
             
-            <?php if($row[$row['divisao_id']]['divisao'] == 1 && $row[$row['divisao_id']]['stage'] == $i) { ?>
+            <?php if($row[$row['divisao_id']]['stage'] == $i) { ?>
             
             <?php $nome = $banco->query("SELECT * FROM `" . DB_PREFIX . "atletas` WHERE `id` = '" . $row[$row['divisao_id']]['nome'] . "' "); ?>
             <tr>
@@ -108,6 +122,6 @@ olá, <?php echo strtoupper($_SESSION["login"]);?> <a href="/painel.php" class="
 </center>
 <?php } ?>
 <br>
-<center><span><b>Versão:</b> 1.0.0.0 - <b>Data:</b> 11/07/2024</span></center>
+<center><span><?php include_once('system/version.php'); ?></span></center>
 </body>
 </html>

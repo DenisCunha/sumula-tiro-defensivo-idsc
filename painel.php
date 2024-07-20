@@ -73,5 +73,6 @@ olá, <?php echo strtoupper($_SESSION["login"]);?> <a href="/sair.php" class="bt
 </form>
 </div>
 </div>
+<center><span><?php include_once('system/version.php'); ?></span></center>
 </body>
 </html>
