@@ -9,7 +9,7 @@
 --
 
 CREATE TABLE IF NOT EXISTS `atletas` (
-  `id` int(11) NOT NULL,
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `nome` varchar(255) NOT NULL,
   `divisao_id` int(2) NOT NULL,
   `user_id` int(2) NOT NULL DEFAULT 0,
@@ -23,7 +23,7 @@ CREATE TABLE IF NOT EXISTS `atletas` (
 --
 
 CREATE TABLE IF NOT EXISTS `competicao` (
-  `evento_id` int(11) NOT NULL,
+  `evento_id` int(11) NOT NULL AUTO_INCREMENT,
   `nomeevento` varchar(255) NOT NULL,
   `dataevento` varchar(10) NOT NULL,
   `stage` int(2) NOT NULL DEFAULT 1,
@@ -49,7 +49,7 @@ INSERT INTO `competicao` (`evento_id`, `nomeevento`, `dataevento`, `stage`, `tar
 --
 
 CREATE TABLE IF NOT EXISTS `divisao` (
-  `divisao_id` int(11) NOT NULL,
+  `divisao_id` int(11) NOT NULL AUTO_INCREMENT,
   `nome` varchar(255) NOT NULL,
   PRIMARY KEY (`divisao_id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
@@ -94,7 +94,7 @@ INSERT INTO `divisao` (`divisao_id`, `nome`) VALUES
 --
 
 CREATE TABLE IF NOT EXISTS `pistas` (
-  `id` int(11) NOT NULL,
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `nome` varchar(250) NOT NULL,
   `divisao` int(2) NOT NULL,
   `competicao_id` int(2) NOT NULL,
@@ -139,7 +139,7 @@ CREATE TABLE IF NOT EXISTS `pistas` (
 --
 
 CREATE TABLE IF NOT EXISTS `total_prova` (
-  `id` int(11) NOT NULL,
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `divisao_id` int(2) NOT NULL,
   `nome_id` int(2) NOT NULL,
   `competicao_id` int(2) NOT NULL,
@@ -164,7 +164,7 @@ CREATE TABLE IF NOT EXISTS `total_prova` (
 --
 
 CREATE TABLE IF NOT EXISTS `usuarios` (
-  `user_id` int(11) NOT NULL,
+  `user_id` int(11) NOT NULL AUTO_INCREMENT,
   `login` varchar(30) DEFAULT NULL,
   `senha` varchar(40) DEFAULT NULL,
   `nivel` int(2) DEFAULT 0,
