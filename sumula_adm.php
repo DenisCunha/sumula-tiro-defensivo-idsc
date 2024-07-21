@@ -163,7 +163,7 @@ $competicao_id = $_POST['competicao_id'];
 
 $pista = $_POST['pista'];
 
-if($dq > 0) {
+if ($dq > 0) {
 $total =  999.99;
 } else {
 $total = $t1 + $t2 + $t3 + $t4 + $t5 + $t6 + $t7 + $t8 + $t9 + $t10 + $t11 + $m1 + $m2 + $m3 + $m4 + $m5 + $m6 + $ep + $ae + $uc + $ns +  $fs + $timer;
@@ -176,6 +176,14 @@ $banco->query("INSERT INTO `" . DB_PREFIX . "pistas` SET `nome` = '" . $nome . "
  `t6` = '" . (int)$t6 . "', `t7` = '" . (int)$t7 . "', `t8` = '" . (int)$t8 . "', `t9` = '" . (int)$t9 . "', `t10` = '" . (int)$t10 . "', `t11` = '" . (int)$t11 . "', 
  `m1` = '" . (int)$m1 . "', `m2` = '" . (int)$m2 . "', `m3` = '" . (int)$m3 . "', `m4` = '" . (int)$m4 . "', `m5` = '" . (int)$m5 . "', `m6` = '" . (int)$m6 . "', 
  `DQ` = '" . (int)$dq . "', `total` = '" . (float)$total . "'");
+
+$verifica = $banco->query("SELECT * FROM `" . DB_PREFIX . "total_prova`  WHERE `nome_id` = '" . $nome . "' AND `divisao_id` = '" . $divisao . "' AND `competicao_id` = '" . $competicao_id . "'");
+if ($verifica->num_rows) {
+ $banco->query("UPDATE `" . DB_PREFIX . "total_prova` SET `p" . $pista ."` = '" . (float)$total . "', `soma` = (`p1` + `p2` + `p3` + `p4` + `p5` + `p6` + `p7` + `p8` + `p9` + `p10`) WHERE `nome_id` = '" . (int)$nome . "' AND `divisao_id` = '" . (int)$divisao . "' AND `competicao_id` = '" . (int)$competicao_id . "'"); 
+ } else {
+ $banco->query("INSERT INTO `" . DB_PREFIX . "total_prova` SET `nome_id` = '" . $nome . "', `divisao_id` = '" . $divisao . "', `competicao_id` = '" . $competicao_id . "', `p" . $pista ."` = '" . (float)$total . "', `soma` = (`p1` + `p2` + `p3` + `p4` + `p5` + `p6` + `p7` + `p8` + `p9` + `p10`)");    
+}
+
  header("Location: /sumula.php");
 
  die();

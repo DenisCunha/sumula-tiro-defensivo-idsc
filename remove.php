@@ -6,16 +6,7 @@ include_once('system/config.php');
     $user_id = $_GET['user_id'];
     $banco->query("DELETE FROM `" . DB_PREFIX . "atletas` WHERE `id` = '$id' AND `user_id` = '$user_id'");
     $banco->query("DELETE FROM `" . DB_PREFIX . "total_prova` WHERE `nome_id` = '$id'");
-    $banco->query("DELETE FROM `" . DB_PREFIX . "resultados` WHERE `nome` = '$id'");
-    $banco->query("DELETE FROM `" . DB_PREFIX . "resultados2` WHERE `nome` = '$id'");
-    $banco->query("DELETE FROM `" . DB_PREFIX . "resultados3` WHERE `nome` = '$id'");
-    $banco->query("DELETE FROM `" . DB_PREFIX . "resultados4` WHERE `nome` = '$id'");
-    $banco->query("DELETE FROM `" . DB_PREFIX . "resultados5` WHERE `nome` = '$id'");
-    $banco->query("DELETE FROM `" . DB_PREFIX . "resultados6` WHERE `nome` = '$id'");
-    $banco->query("DELETE FROM `" . DB_PREFIX . "resultados7` WHERE `nome` = '$id'");
-    $banco->query("DELETE FROM `" . DB_PREFIX . "resultados8` WHERE `nome` = '$id'");
-    $banco->query("DELETE FROM `" . DB_PREFIX . "resultados9` WHERE `nome` = '$id'");
-    $banco->query("DELETE FROM `" . DB_PREFIX . "resultados10` WHERE `nome` = '$id'");
+    $banco->query("DELETE FROM `" . DB_PREFIX . "pistas` WHERE `nome` = '$id'");
     
     header("Location: /atleta.php?msg=3");
 

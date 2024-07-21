@@ -65,8 +65,7 @@ for ($i = 0; $i < 25; $i++) {
 ?>
 <?php foreach ($divisao->rows as $row) { ?>
 <?php if($result[$row['divisao_id']]->num_rows) { ?>
-  <?php $divisaonome[$row['divisao_id']] = $banco->query("SELECT * FROM `" . DB_PREFIX . "divisao`  WHERE  `divisao_id` = '" . $row['divisao_id'] ."' "); 
-?>
+  <?php $divisaonome[$row['divisao_id']] = $banco->query("SELECT * FROM `" . DB_PREFIX . "divisao`  WHERE  `divisao_id` = '" . $row['divisao_id'] ."' "); ?>
   
   <?php for ($i =1; $i <= $stages->row['stage']; $i ++) { ?>
 <div class="content">
@@ -89,8 +88,8 @@ for ($i = 0; $i < 25; $i++) {
             <?php $nome = $banco->query("SELECT * FROM `" . DB_PREFIX . "atletas` WHERE `id` = '" . $row[$row['divisao_id']]['nome'] . "' "); ?>
             <tr>
                 <td><?php echo $nome->row['nome']; ?> <?php if($row[$row['divisao_id']]['dq']) { echo "<span class='dq'>*</span>"; } ?></td>
-                <td><?php echo $row[$row['divisao_id']]['timer'] ; ?></td>
-                <td><?php echo $row[$row['divisao_id']]['total'] ; ?></td>
+                <td><?php echo $row[$row['divisao_id']]['timer']; ?></td>
+                <td><?php echo $row[$row['divisao_id']]['total']; ?></td>
             </tr>
             <?php } ?>
              
