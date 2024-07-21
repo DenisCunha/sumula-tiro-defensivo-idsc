@@ -24,6 +24,7 @@ $divisao = $banco->query("SELECT * FROM `" . DB_PREFIX . "divisao`  WHERE 1 ORDE
 
 foreach ($divisao->rows as $row) {
 $result[$row['divisao_id']] = $banco->query("SELECT * FROM `" . DB_PREFIX . "pistas`  WHERE `divisao` = '" . $row['divisao_id'] . "' AND `competicao_id` = '" . $competicao_id . "' ORDER BY `total` ASC");
+$resultado[$row['divisao_id']] = $banco->query("SELECT * FROM `" . DB_PREFIX . "total_prova` WHERE `divisao_id` = '" . $row['divisao_id'] . "' AND `competicao_id` = '" . $competicao_id . "' ORDER BY `soma` ASC");
 }
 
 ?>
@@ -100,6 +101,74 @@ for ($i = 0; $i < 25; $i++) {
 
 </div>
 <?php }  ?>
+<hr><br>
+<h3>Resultado Final <?php echo $divisaonome[$row['divisao_id']]->row['nome']; ?></h3>
+<br>
+<?php if($resultado[$row['divisao_id']]->num_rows) { ?>
+<div class="content">
+    <table class="rTable2">
+        <thead> <tr style="background:<?php echo $cores[$row['divisao_id']]; ?>;color:#fff;"><th colspan="12">Resultado Prova - <?php echo $divisaonome[$row['divisao_id']]->row['nome']; ?></th></tr>
+            <tr>
+<?php foreach ($resultado[$row['divisao_id']]->rows as $row) { 
+$p1 = $row['p1'];
+$p2 = $row['p2'];
+$p3 = $row['p3'];
+$p4 = $row['p4'];
+$p5 = $row['p5'];
+$p6 = $row['p6'];
+$p7 = $row['p7'];
+$p8 = $row['p8'];
+$p9 = $row['p9'];
+$p10 = $row['p10'];
+ } ?>
+                <th>Nome </th>
+                <th style="<?php if($p1 > 0) { } else { echo 'display:none;';} ?>">P1</th>
+                <th style="<?php if($p2 > 0) { } else { echo 'display:none;';} ?>">P2</th>
+                <th style="<?php if($p3 > 0) { } else { echo 'display:none;';} ?>">P3</th>
+                <th style="<?php if($p4 > 0) { } else { echo 'display:none;';} ?>">P4</th>
+                <th style="<?php if($p5 > 0) { } else { echo 'display:none;';} ?>">P5</th>
+                <th style="<?php if($p6 > 0) { } else { echo 'display:none;';} ?>">P6</th>
+                <th style="<?php if($p7 > 0) { } else { echo 'display:none;';} ?>">P7</th>
+                <th style="<?php if($p8 > 0) { } else { echo 'display:none;';} ?>">P8</th>
+                <th style="<?php if($p9 > 0) { } else { echo 'display:none;';} ?>">P9</th>
+                <th style="<?php if($p10 > 0) { } else { echo 'display:none;';} ?>">P10</th>
+                <th>Tempo Total</th>
+            </tr>
+        </thead>
+
+        <tbody>
+            
+            <?php foreach ($resultado[$row['divisao_id']]->rows as $row2) { ?>
+            
+            <?php if($row2['divisao_id'] == $row['divisao_id']) { ?>
+            
+            <?php $nome = $banco->query("SELECT * FROM `" . DB_PREFIX . "atletas` WHERE `id` = '" . $row2['nome_id'] . "' "); ?>
+            <tr>
+                <td><?php echo $nome->row['nome']; ?> <?php if($row2['soma'] >= 999) { echo "<span class='dq'>DQ</span>"; } ?></td>
+                <td style="<?php if($p1 > 0) { } else { echo 'display:none;';} ?>"><?php echo $row2['p1'] ; ?></td>
+                <td style="<?php if($p2 > 0) { } else { echo 'display:none;';} ?>"><?php echo $row2['p2'] ; ?></td>
+                <td style="<?php if($p3 > 0) { } else { echo 'display:none;';} ?>"><?php echo $row2['p3'] ; ?></td>
+                <td style="<?php if($p4 > 0) { } else { echo 'display:none;';} ?>"><?php echo $row2['p4'] ; ?></td>
+                <td style="<?php if($p5> 0) { } else { echo 'display:none;';} ?>"><?php echo $row2['p5'] ; ?></td>
+                <td style="<?php if($p6 > 0) { } else { echo 'display:none;';} ?>"><?php echo $row2['p6'] ; ?></td>
+                <td style="<?php if($p7 > 0) { } else { echo 'display:none;';} ?>"><?php echo $row2['p7'] ; ?></td>
+                <td style="<?php if($p8 > 0) { } else { echo 'display:none;';} ?>"><?php echo $row2['p8'] ; ?></td>
+                <td style="<?php if($p9 > 0) { } else { echo 'display:none;';} ?>"><?php echo $row2['p9'] ; ?></td>
+                <td style="<?php if($p10 > 0) { } else { echo 'display:none;';} ?>"><?php echo $row2['p10'] ; ?></td>
+                <td><?php echo $row2['soma'] ; ?></td>
+            </tr>
+            <?php } ?>
+             
+            <?php }  ?>
+
+        </tbody>
+    </table>
+
+</div>
+
+<br>
+<?php }  ?>
+
 
 <br>
 <?php }  ?>
