@@ -26,7 +26,7 @@ Desenvolvido em PHP, JavaScript!
 - Banco de Dados Mysql
 
 ## Como utlizar?
-Faça o download do arquivo .zip,  extraia dentro do seu servidor via FTP ou Gerenciador de Arquivos
+Faça o download do arquivo v1.1.0.0.zip,  extraia dentro do seu servidor via FTP ou Gerenciador de Arquivos
 
 Abra no navegador o dominio aonde foi extraido o conteúdo do arquivo .zip e informe os dados de banco de dados e admin para realizar a instalação automática do script.
 
