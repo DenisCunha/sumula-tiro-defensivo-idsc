@@ -2,22 +2,22 @@
 ini_set('display_errors', 1);
 error_reporting(E_ALL);
 
-
 if (file_exists('../system/config.php')) {
 	if (filesize('../system/config.php') > 0) {
 		$install = true;
 	} else  {
     $install = false;
   }
+  if (!is_writable('../system/config.php')) {
+    $error['config'] = 'Aviso: system/config.php precisa ser gravável para que o Sistema seja instalado!';
+  }  
 } else {
-  $error['config_file'] = 'Aviso: o arquivo system/config.php não existe, por favor renomear o arquivo config-dist.php para config.php!';
+    $install = false;
+    $error['config_file'] = 'Aviso: o arquivo system/config.php não existe, por favor renomear o arquivo config-dist.php para config.php!';
 }
 
 $error = array();
 
-if (!is_writable('../system/config.php')) {
-  $error['config'] = 'Aviso: system/config.php precisa ser gravável para que o Sistema seja instalado!';
-}
 
 if (phpversion() < '5.6') {
   $error['php'] = 'Aviso: Você precisa usar PHP5.6 ou superior para que o Sistema funcione!';
@@ -129,7 +129,7 @@ setTimeout(() => {
 <?php } ?>
 <?php } ?>
 <br>
-<center><span><b>Versão:</b> 1.1.0.0 - <b>Data:</b> 11/07/2024</span></center>
+<center><span><?php include_once('../system/version.php'); ?></span></center>
 <br><br>
   </div>
 </body>

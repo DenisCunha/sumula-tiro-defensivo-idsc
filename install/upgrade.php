@@ -77,7 +77,7 @@ setTimeout(() => {
 <?php } ?>
 <?php } ?>
 <br>
-<center><span><b>Versão:</b> 1.1.0.0 - <b>Data:</b> 11/07/2024</span></center>
+<center><span><?php include_once('../system/version.php'); ?></span></center>
 <br><br>
   </div>
 </body>
