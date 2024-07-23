@@ -9,6 +9,8 @@ if (file_exists('../system/config.php')) {
 	} else  {
     $upgrade = false;
   }
+} else {
+  header("Location: /install/install.php");
 }
 
 // Configuration
@@ -52,7 +54,7 @@ if (!array_filter(array('mysql', 'mysqli', 'pdo', 'pgsql'), 'extension_loaded'))
 </head>
 <body class="bg-light">
 <div class="container">
-<?php if($upgrade) { ?> 
+<?php if($upgrade && !isset($error)) { ?> 
 <h3>Sistema Atualizado</h3>
 <script type="text/javascript">
 setTimeout(() => {
