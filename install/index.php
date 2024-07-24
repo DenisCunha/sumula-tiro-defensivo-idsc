@@ -51,6 +51,7 @@ if (!array_filter(array('mysql', 'mysqli', 'pdo', 'pgsql'), 'extension_loaded'))
 <div class="container">
 <?php if($install) { ?> 
 <h3>Sistema já instalado</h3>
+<?php include_once('upgrade.php'); ?>
 <script type="text/javascript">
 setTimeout(() => {
  window.location.href = "/";

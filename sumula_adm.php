@@ -164,7 +164,7 @@ $competicao_id = $_POST['competicao_id'];
 $pista = $_POST['pista'];
 
 if ($dq > 0) {
-$total =  999.99;
+$total =  10000.00;
 } else {
 $total = $t1 + $t2 + $t3 + $t4 + $t5 + $t6 + $t7 + $t8 + $t9 + $t10 + $t11 + $m1 + $m2 + $m3 + $m4 + $m5 + $m6 + $ep + $ae + $uc + $ns +  $fs + $timer;
 }

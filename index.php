@@ -39,6 +39,7 @@ $resultado[$row['divisao_id']] = $banco->query("SELECT * FROM `" . DB_PREFIX . "
 <style>
 .imgs {padding:10px;display:inline-block;border:1px solid #fff;}
 .imgs :hover{border:1px solid #ddd;}
+.red {color: #870000;}
 </style>
 </head>
 <body>
@@ -67,9 +68,16 @@ for ($i = 0; $i < 25; $i++) {
 <?php foreach ($divisao->rows as $row) { ?>
 <?php if($result[$row['divisao_id']]->num_rows) { ?>
   <?php $divisaonome[$row['divisao_id']] = $banco->query("SELECT * FROM `" . DB_PREFIX . "divisao`  WHERE  `divisao_id` = '" . $row['divisao_id'] ."' "); ?>
-  
   <?php for ($i =1; $i <= $stages->row['stage']; $i ++) { ?>
-<div class="content">
+    <?php foreach ($result[$row['divisao_id']]->rows as $row[$row['divisao_id']]) { 
+    if($row[$row['divisao_id']]['stage'] == $i) { 
+     $exibe = true;
+    } else {
+     $exibe = false;
+    }
+    }
+   ?>
+<div class="content" style="<?php if($exibe) { } else { echo 'display:none;';} ?>">
     <table class="rTable">
         <thead> <tr style="background:<?php echo $cores[$row['divisao_id']]; ?>;color:#fff;"><th colspan="3">Pista <?php echo $i .' - ' . $divisaonome[$row['divisao_id']]->row['nome']; ?></th></tr>
             <tr>
@@ -88,9 +96,14 @@ for ($i = 0; $i < 25; $i++) {
             
             <?php $nome = $banco->query("SELECT * FROM `" . DB_PREFIX . "atletas` WHERE `id` = '" . $row[$row['divisao_id']]['nome'] . "' "); ?>
             <tr>
-                <td><?php echo $nome->row['nome']; ?> <?php if($row[$row['divisao_id']]['dq']) { echo "<span class='dq'>*</span>"; } ?></td>
+                <td><?php echo $nome->row['nome']; ?></td>
+                <?php if($row[$row['divisao_id']]['dq']) { $dq = true;?>
+                <td><span class="red">DQ Desclassificado</span></td>
+                <td></td>
+                <?php } else { $dq = false; ?>
                 <td><?php echo $row[$row['divisao_id']]['timer']; ?></td>
                 <td><?php echo $row[$row['divisao_id']]['total']; ?></td>
+                <?php } ?>
             </tr>
             <?php } ?>
              
@@ -144,18 +157,31 @@ $p10 = $row['p10'];
             
             <?php $nome = $banco->query("SELECT * FROM `" . DB_PREFIX . "atletas` WHERE `id` = '" . $row2['nome_id'] . "' "); ?>
             <tr>
-                <td><?php echo $nome->row['nome']; ?> <?php if($row2['soma'] >= 999) { echo "<span class='dq'>DQ</span>"; } ?></td>
+                <td><?php echo $nome->row['nome']; ?></td>
+                <?php if($dq) {  $des = "DQ: Desclassificado"; ?>    
+                <td style="<?php if($p1 > 0) { } else { echo 'display:none;';} ?>"><span class="red"><?php echo $des; ?></span></td>
+                <td style="<?php if($p2 > 0) { } else { echo 'display:none;';} ?>"><span class="red"><?php echo $des; ?></span></td>
+                <td style="<?php if($p3 > 0) { } else { echo 'display:none;';} ?>"><span class="red"><?php echo $des; ?></span></td>
+                <td style="<?php if($p4 > 0) { } else { echo 'display:none;';} ?>"><span class="red"><?php echo $des; ?></span></td>
+                <td style="<?php if($p5 > 0) { } else { echo 'display:none;';} ?>"><span class="red"><?php echo $des; ?></span></td>
+                <td style="<?php if($p6 > 0) { } else { echo 'display:none;';} ?>"><span class="red"><?php echo $des; ?></span></td>
+                <td style="<?php if($p7 > 0) { } else { echo 'display:none;';} ?>"><span class="red"><?php echo $des; ?></span></td>
+                <td style="<?php if($p8 > 0) { } else { echo 'display:none;';} ?>"><span class="red"><?php echo $des; ?></span></td>
+                <td style="<?php if($p9 > 0) { } else { echo 'display:none;';} ?>"><span class="red"><?php echo $des; ?></span></td>
+                <td style="<?php if($p10 > 0) { } else { echo 'display:none;';} ?>"><span class="red"><?php echo $des; ?></span></td>
+                <?php } else { ?>
                 <td style="<?php if($p1 > 0) { } else { echo 'display:none;';} ?>"><?php echo $row2['p1'] ; ?></td>
                 <td style="<?php if($p2 > 0) { } else { echo 'display:none;';} ?>"><?php echo $row2['p2'] ; ?></td>
                 <td style="<?php if($p3 > 0) { } else { echo 'display:none;';} ?>"><?php echo $row2['p3'] ; ?></td>
                 <td style="<?php if($p4 > 0) { } else { echo 'display:none;';} ?>"><?php echo $row2['p4'] ; ?></td>
-                <td style="<?php if($p5> 0) { } else { echo 'display:none;';} ?>"><?php echo $row2['p5'] ; ?></td>
+                <td style="<?php if($p5 > 0) { } else { echo 'display:none;';} ?>"><?php echo $row2['p5'] ; ?></td>
                 <td style="<?php if($p6 > 0) { } else { echo 'display:none;';} ?>"><?php echo $row2['p6'] ; ?></td>
                 <td style="<?php if($p7 > 0) { } else { echo 'display:none;';} ?>"><?php echo $row2['p7'] ; ?></td>
                 <td style="<?php if($p8 > 0) { } else { echo 'display:none;';} ?>"><?php echo $row2['p8'] ; ?></td>
                 <td style="<?php if($p9 > 0) { } else { echo 'display:none;';} ?>"><?php echo $row2['p9'] ; ?></td>
                 <td style="<?php if($p10 > 0) { } else { echo 'display:none;';} ?>"><?php echo $row2['p10'] ; ?></td>
                 <td><?php echo $row2['soma'] ; ?></td>
+                <?php } ?>
             </tr>
             <?php } ?>
              
