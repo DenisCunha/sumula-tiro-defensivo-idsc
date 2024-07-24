@@ -32,6 +32,8 @@ Abra no navegador o dominio aonde foi extraido o conteúdo do arquivo .zip e inf
 
 em caso de erros enviar no email suporte@opencartmaster.com.br
 
+VIDEO de Instruções de Instalação e Uso abaixo
+
 [![IMAGE_ALT](https://img.youtube.com/vi/9oPwjGF8I-I/0.jpg)](https://www.youtube.com/watch?v=9oPwjGF8I-I)
 
 ## Desenvolvimento
