@@ -26,11 +26,13 @@ Desenvolvido em PHP, JavaScript!
 - Banco de Dados Mysql
 
 ## Como utlizar?
-Faça o download do arquivo v1.1.0.0.zip,  extraia dentro do seu servidor via FTP ou Gerenciador de Arquivos
+Faça o download do arquivo release ultima versão,  extraia dentro do seu servidor via FTP ou Gerenciador de Arquivos, renomeio o arquivo config-dist.php dentro pasta system/ para config.php
 
 Abra no navegador o dominio aonde foi extraido o conteúdo do arquivo .zip e informe os dados de banco de dados e admin para realizar a instalação automática do script.
 
 em caso de erros enviar no email suporte@opencartmaster.com.br
+
+[![IMAGE_ALT](https://img.youtube.com/vi/9oPwjGF8I-I/0.jpg)](https://www.youtube.com/watch?v=9oPwjGF8I-I)
 
 ## Desenvolvimento
 Denis Cunha IAT e DSO IDSC!
